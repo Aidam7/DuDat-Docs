@@ -1,0 +1,197 @@
+\chapter{Technologie}
+\section{Licence}
+Jednou z prvních věcí kterou musíme zvážit ještě než na projektu začneme pracovat je licence pod kterou projekt bude zpracovávat. Pro projekt byla zvolena MIT Licence, také známá jako Expat nebo X11\cite{GNU-Mit}. MIT Licence vznikla na Massachusettském technologickém institutu roku 1988 a umožňuje ostatním software jakkoliv upravovat a vydávat nové verze programu, i pod jinou licencí, dokud uvedou autora a ponechají původní kód pod MIT Licencí\cite{Github-Mit}.
+\section{Stack}
+V dnešní době je prakticky neomezeně různých způsobů jak si sestavit technologický stack\footnote{Stack je označení pro technologie, které jsou na projektu použity} pro tvorbu full-stackové\footnote{Termín full-stack označuje aplikace, které se skládají jak z klientské části, tedy "Frontend", a ze serverové části, tedy "Backend". Backend a Frontend spolu komunikují za pomoci API.} webové aplikace.
+Pro tvorbu jsem zvolil T3 Stack, T3 Stack skládá dohromady různé poměrně populární technologie na tvorbu full-stack aplikací, ale zároveň při tvoření projektu, za použití \code{create-t3-app} si umožňuje Stack jakkoliv upravit\cite{t3stack}.
+\subsection{Typescript}
+T3 Stack automaticky obsahuje Typescript\footnote{Zkráceně TS}, to je jedna z jeho hlavních předností, Typescript je odnož velmi populárního jazyku, pro tvorbu webových aplikací, Javascript\footnote{Zkráceně JS}. Typescript se od JS liší, jak již název napovídá, přidáním typů, byť se může zdát, že se jedná pouze o "syntaktický cukr"\footnote{Slangový termín pro nadbytečné funkce programovacích jazyků} tak je TS, narozdíl od JS, který je interpretovaný jazyk, kompilovaný jazyk.
+\subsubsection{Interpretované a Kompilované jazyky}
+Interpretované jazyky jsou spouštěny postupným čtením kódu od 0. řádku až na konec programu, to má za následek, že některé chyby jdou zachytit až po spuštění samotného programu. Kompilované jazyky před spuštěním projdou kompilací a mohou tak zachytit všechny chyby, které by mohly nastat.
+
+Proces kompilace dovoluje Typescriptu zachytávat chyby, které jsou spojeny s daty co by byly typu \code{undefined} nebo \code{null}. Typ \code{undefined} se v kódu vyskytne hlavně když čekáme na data z databáze, typ \code{null} když nám databáze nic nevrátí.
+Typescript je kompilovaný jazyk poměrně netradičním způsobem, protože TS se kompiluje na JS a ne na machine code\footnote{Kód, který již dokáže přečíst počítač.}.
+
+\subsection{React a Next.js}
+
+Celá uživatelská část aplikace je psaná pomocí nesmírně populárního frameworku Next.js, který je zároveň nadstavba snad ještě populárnějšího frameworku React. T3 Stack automaticky obsahuje Next.js, vzhledem k tomu, že prakticky nemá žádné nevýhody a poskytuje velmi příjemné funkce, které ulehčují vývoj aplikací, například automatickou optimalizaci routování nebo cachování\cite{vercel}.
+
+\subsection{tRPC}
+Pro řešení API, tedy komunikačního kanálu mezi uživatelskou a serverou částí, T3 Stack volí tRPC. tRPC je elegantní způsob jak psát endpointy\footnote{Endpoint = část API, se kterou se dá komunikovat "z venčí"}, na rozdíl od REST API nemusíme v tRPC řešit vracení statusů a postačí nám vyhodit error. Pro typovou validaci dat volí T3 stack knihovnu Zod\cite{zod}.
+\begin{lstlisting}[caption={Úryvek z "groups" routeru zobrazující mazání skupiny}]
+// Nerelevantní části byly nahrazeny *pseudokódem*
+deleteById: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      //*Dostaneme z databáze skupinu s identifikátorem o hodnotě id a uložíme jí do proměnné group*
+      //Pokud je group o typu null nebo undefined vrátíme error
+      if (!group) throw new Error("Group not found");
+      //Pokud je id majitele skupiny jiné než id přihlášeného uživatele vrátíme error
+      if (group.ownerId !== ctx.session.user.id)
+        throw new Error("You are not the owner of this group");
+      //*Smažeme skupinu v databázi*
+    }),
+\end{lstlisting}
+Podrobnější dokumentace API se nachází níže.
+
+\subsection{Prisma a Databáze}
+Pro samotnou databázi jsem se rozhodl pro PostgreSQL, protože se jedná o velmi populární a robustní SQL Databázi.
+
+Pro připojení na Databázi volí T3 Stack databázové ORM Prisma, v nedávných verzích přibyla možnost použití Drizzle nicméně já zvolil Prismu. Prisma je páteřní technologie, která umožňuje sdílení typů mezi serverou a klientskou částí aplikace. Další bezpochybnou výhodou Prismy je její bezpečnost, psaní čistých SQL příkazů do aplikace může vést někdy až ke kritickým chybám či ztrátě dat. Prisma ve vývojovém prostředí poskytuje našeptávání přímo z databázového schématu\footnote{Databázové schéma určuje architekturu databáze.} a tak je mnohem těžší udělat chyby.
+Pro design databázového schématu používá Prisma vlastní jazyk.
+
+\begin{lstlisting}[language=Prisma, caption={Úryvek z Databázové schématu zobrazující strukturu tabulky pro členství ve skupině}]
+model GroupMembership {
+  id      String @id @default(cuid())
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groupId String
+  group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, groupId])
+  @@index([userId])
+  @@index([groupId])
+}
+\end{lstlisting}
+Podrobnější dokumentace celého databázového schéma se nachází níže.
+
+\subsection{NextAuth}
+Autentikaci a autorizaci užvitelů T3 Stack řeší za pomocí NextAuth. NextAuth nám umožňuje, místo standardního přihlašování email-heslo, použít takzvané \textit{Provider}y\footnote{Provider = Poskytovatel přihlášení}.
+To má mnoho výhod, například, nemusíme ukládat uživatelovo heslo a přihlašování pro uživatele je jednodušší, protože mu stačí kliknout na jedno tlačítko a jeho prohlížeč ho automaticky přihlásí, za předpokladu, že už na něj přihlášený je.
+Pokud přihlášený není bude poslán na přihlašovací stránku providera. NextAuth nabízí přes 30 Providerů\cite{next-auth}, já se rozhodl pro použití přihlášení od společnosti Google vzhledem k rozšířenosti Google účtů ve společnosti. Jednou z nevýhod tohoto řešení je, že pokud u vašeho Providera dojde k úniku dat budou v ohrožení i data vašich uživatelů.
+
+\subsection{TailwindCSS, PostCSS a NextUI}
+Na stylování projektu používá T3 Stack TailwindCSS. Tailwind CSS nabízí rychlou a flexibilní alternativu k psaní vanilla\footnote{Vanilla = Označení pro neupravenou verzi technologie} CSS.
+\begin{lstlisting}[caption={Ukázka stylování HTML prvku za použití vanilla CSS\cite{tailwind-example}}]
+//CSS soubor:
+.vanilla {
+  margin-top: 12px,
+  margin-bottom: 12px,
+  padding-left: 12px,
+  padding-right: 12px
+}
+//HTML soubor:
+<div class="vanilla"></div>
+\end{lstlisting}
+\begin{lstlisting}[caption={Ukázka stylování HTML prvku za použití TailwindCSS\cite{tailwind-example}}]
+    <div class="mx-3 py-3"></div>
+\end{lstlisting}
+Než budeme moct Tailwind vůbec použít musíme vytvořit konfigurační soubor\newline\code{tailwind.config.ts}.
+
+\begin{lstlisting}[caption={Konfigurační soubor TailwindCSS}]
+import { type Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
+import { nextui } from "@nextui-org/react";
+
+export default {
+  content: [
+    "./src/**/*.tsx",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
+      colors: {
+        black: "#0B191E",
+        cobalt: "#1D5B72",
+        blue: "#043B62",
+        "neon-blue": "#58C6BE",
+      },
+    },
+  },
+  darkMode: "class",
+  plugins: [nextui()],
+} satisfies Config;
+
+\end{lstlisting}
+Tailwind má sám o sobě velikost přibližně \code{3645 kB} to se může dát s dnešními velikostmi souborů jako málo, ale na webu je to opravdu velký soubor, proto jsem se rozhodl použít technologii PostCSS, které při stavění projektu do produkce vymaže nepoužitá stylovací pravidla z Tailwindu a sníží tím velikost jeho souboru. PostCSS se nastavuje v konfiguračním souboru \code{postcss.config.jcs}
+
+\begin{lstlisting}[caption={Konfigurační soubor PostCSS}]
+    const config = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+module.exports = config;
+\end{lstlisting}
+Tailwind nám poskytuje velkou kontrolu nad naším stylováním, ale na rozdíl od CSS frameworku Bootstrap neposkytuje předem postavené komponenty, abych tedy urychlil vývoj aplikace rozhodl jsem se použít předem stavěné komponenty za použití Tailwindu od NextUI\cite{nextui}, jmenovitě jsem použil především tabulky.
+
+\subsection{EsLint a Prettier}
+Správné formátování kódu a vyhýbání se špatným vývojovým praktikám jsou, byť snad přehlédnutelná, důležitá část jakéhokoliv projektu. Na formátování používá T3 Stack Prettier, ten v kombinaci s přídavným balíčkem do VS Code upravuje formátování při uložení souboru. Dobře naformátovaný kód ulehčuje čitelnost. Prettier se nastavuje s konfiguračním souboru \code{prettier.config.mjs}.
+\begin{lstlisting}[caption=Konfigurační soubor Prettier]
+/** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').options} */
+const config = {
+  plugins: ["prettier-plugin-tailwindcss"],
+};
+
+export default config;
+\end{lstlisting}
+EsLint se používá na varování před praktikami, které by mohly vést k chybě a rozšiřuje tak "varovný systém", který už samotný Typescript poskytuje.
+EsLint se nastavuje v konfiguračním souboru \code{.eslintrc.cjs}.
+
+
+\begin{lstlisting}[caption=Konfigurační soubor EsLint]
+    /** @type {import("eslint").Linter.Config} */
+const config = {
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: true,
+  },
+  plugins: ["@typescript-eslint"],
+  extends: [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+  ],
+  rules: {
+    // These opinionated rules are enabled in stylistic-type-checked above.
+    // Feel free to reconfigure them to your own preference.
+    "@typescript-eslint/array-type": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+
+    "@typescript-eslint/consistent-type-imports": [
+      "warn",
+      {
+        prefer: "type-imports",
+        fixStyle: "inline-type-imports",
+      },
+    ],
+    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      {
+        checksVoidReturn: { attributes: false },
+      },
+    ],
+  },
+};
+
+module.exports = config;
+\end{lstlisting}
+EsLint má v konfiguraci 3 možnosti hlášení, \code{off}, se hlavně používá na přepsání základních pravidel EsLintu, \code{warn}, vytvoří varování, které nikterak nebrání kompilaci kódu, \code{error}, zabrání kompilaci kódu a používá se pouze na nejzávažnější chyby\cite{eslint}.
+\section{Dodatečné technlogie}
+Projekt je spouštěn pomocí node.js v kombinaci s NPM. Celý kód je verzován verzovacím systémem Git a psán v textovém editoru Visual Studio Code.
+\subsection{package.json}
+Tento konfigurační soubor je často přehlížen, ale jedná se o stěžejní konfigurační soubor celého projektu. V \code{package.json} jsou definovaný takzvané "závislosti" projektu. \code{Package.json} ve své podstatě funguje jako nákupní seznam kde máme právě tyto závislost napsané. Když naklonujeme projekt tak jedna z prvních věcí co musíme udělat je spustit příkaz \code{npm i}, ten vezme \code{package.json} a z platformy NPM\cite{npm} stáhne všechny balíčky na kterých projekt závisí a automaticky je nainstaluje do složky \code{node\_module}.
+\section{Konfigurace}
+Ještě než se nám podaří spustit projekt musíme vytvořit konfigurační soubor \code{.env}\footnote{Z anglického "enviorement", tedy "prostředí"}. Ten z bezpečnostních důvodů není obsažen v repozitáři, protože obsahuje velmi citlivé informace jako přístupové údaje k databázi nebo klíče k autentikaci uživatelů. Vzhledem k tomu, že \code{.env} soubor musí mít pro správné fungování aplikace jistou strukturu je v repozitáři šablona \code{.env.example}. Následuje soubor \code{.env.example}, komentáře v souboru byly vynechány.
+\begin{lstlisting}[caption=Šablona konfiguračního souboru .env]
+...
+# Prisma
+...
+DATABASE_URL=""
+DATABASE_NON_POOLING_URL=""
+
+# Next Auth
+...
+NEXTAUTH_SECRET=""
+NEXTAUTH_URL=""
+
+# Next Auth Providers
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+\end{lstlisting}
