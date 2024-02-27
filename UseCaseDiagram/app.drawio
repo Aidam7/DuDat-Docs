@@ -1,1 +1,91 @@
-<mxfile host="Electron" modified="2023-10-19T18:10:17.937Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/20.6.2 Chrome/106.0.5249.199 Electron/21.3.3 Safari/537.36" etag="oiczFRNaCAYcBXTbGi_q" version="20.6.2" type="device"><diagram id="jqEfg7KUz4Q2hc0QagN2" name="Stránka-1">7Vpbd5s4EP41PCYHAcbm0Zds2z2bbs7mbLd9JKAY1QJREI6dX78SSBghErsxviTHfjEaiZE082n0jYRhT+PVp8xPo1sSQmxYZrgy7JlhWcAxXfbHJetKMrKEYJ6hUDTaCO7RMxRCU0gLFMJcaUgJwRSlqjAgSQIDqsj8LCNParNHgtVeU38ONcF94GNd+h8KaSRnMdzIP0M0j2TPwPWqmtiXjcVM8sgPyVNDZN8Y9jQjhFZP8WoKMTeetEv13h8v1NYDy2BCd3lhBLPPt1+Xsx/R85+3+Xrx6z76ciW0LH1ciAkblouZvskjYWrZqOlamML9VRBZcZWXjhqzBpaTMmdPNvXsac7/xylGCz+AUiEbWaWzqhZGqdVbFK64PKIxZgLAHnOakQWcEkwyJklIAnn3COOWyMdonrBiwCwBmXyyhBlFzIdjURGjMOTdTJ4iROF9ykdlz54YYpksI0USQm4ksx5W06rSREwnXDVEwsqfIIkhzdasiagdOsLjaxXKTxv8DIUoakDHFjJfIHZeK944lT0Iv/6Gj629fQxe8vFXmME54n5a+okxtY0JU2IWxnRgTG7Q0qc8GuzmfrY8Uv5YxHgcUNJ041/+A8R3JEcUEe7OB0IpiTv8TEmqIogUFKOEQUgGB1NMTgQay+nH5QPV447ucbfD48A6lMttzeX/1H4qPQ41+zOtLKa+tEgaNm2YD/RkPuButV9tq6YBnUPZz9Hsd8cx7XkowhzmY8DAeP52BOapDTnoiD1tgyXhmG/UPIBjP89RoNpJjc9tq8EVot953fVAlH4opdlKvFgW1o3CHcwQmyTfMCpZwib8vVloaOLFjaqyJHW96LecFFkAtwdm6mdzSLevZhgqVEVHQcPLgw4nS1kGsU/RUiU4XZ4XPdwRVG4TAmS2p4LMboOnmrd4q0lIWoqc1j5peS1FlWE0RSUQ62m/HZvuBZv7Y9M5K2y2oAnAG6EJhqqi4XGROTwWMsHv4FJiEBwLg/a7xOCHiY+jDhS6fsxpTMnoURLgIoS1sJvXc6+UBF7F5+45WwZZIuI/lPo4nlI+39ICg4kxmO3EpF5dZW16VR8miE6NZr7eRbvMa5v9VF/1AiVrpCi9aocz8viYw4P43tN8/6+a1J1D9tYXbW5lb6dP34B+LPNtTZdE5CBl5rEoUpQU+nI7ZfqxgyGPm34A/exDJHIwTRi83oshvZMbUj9R0CwWFNmyZBwVQbjwk/ZyvhCUShEDhr9uNBM7+s4Dds3Xh9VaPWBLe7tF9iXb36yXasC9brBAP2L6WOyqjhg90CuWyA1VJmTvtxIOT6DA0U4XzjtGyti3PUhalyB5ECB2HSZ8qEAjV9regebKvHYcdevoBUvyllVuX+r7B4xBehYnrzF+xhX7TcnzsrrQSBaMA5shqSnxWsfAGVFiuyO3qG9aj0KJLT1JO1CEf4/nx96uYf/MuHH7Bm301rAPWora1/sHDvsSjBd07oXO8yIlbU5ietde8/c2qLZvjS33VbWHBu4OJw0X4G4FrndWwK0/RJDIBf0gV8vcT4pcPaX/O4xLdjWjyXvnWx1HkEfmW5dvSXoIDBKkZxIYjrOj2b3d37Pi5ovdqvnmu2f75n8=</diagram></mxfile>
+<mxfile host="Electron" modified="2024-02-22T12:28:44.811Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="f8F-Sh0-gQzpR3CymZx7" version="21.1.2" type="device">
+  <diagram id="jqEfg7KUz4Q2hc0QagN2" name="Stránka-1">
+    <mxGraphModel dx="1418" dy="828" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8erHMNvDYhzJMsykqShI-1" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Aplikace&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="740" y="10" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-2" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Neregistrovaný uživatel&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=24;" parent="1" vertex="1">
+          <mxGeometry x="50" y="40" width="60" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-3" value="Registrovat se" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="150" y="110" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-4" value="Přihlásit se" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="150" y="40" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-5" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="8erHMNvDYhzJMsykqShI-2" target="8erHMNvDYhzJMsykqShI-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="340" as="sourcePoint" />
+            <mxPoint x="440" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-6" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="8erHMNvDYhzJMsykqShI-2" target="8erHMNvDYhzJMsykqShI-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="90" y="110" as="sourcePoint" />
+            <mxPoint x="170" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-7" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="8erHMNvDYhzJMsykqShI-3" target="8erHMNvDYhzJMsykqShI-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="340" as="sourcePoint" />
+            <mxPoint x="440" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-8" value="&amp;lt;include&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" parent="8erHMNvDYhzJMsykqShI-7" vertex="1" connectable="0">
+          <mxGeometry x="0.3333" y="2" relative="1" as="geometry">
+            <mxPoint x="28" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-9" value="Uživatel" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="50" y="240" width="60" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-11" value="Vytvořit skupinu" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="150" y="260" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-13" value="" style="curved=1;endArrow=classic;html=1;rounded=0;fontSize=14;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="8erHMNvDYhzJMsykqShI-3" target="8erHMNvDYhzJMsykqShI-11" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="340" as="sourcePoint" />
+            <mxPoint x="440" y="290" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="150" />
+              <mxPoint x="380" y="210" />
+              <mxPoint x="340" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-14" value="&amp;lt;include&amp;gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=14;" parent="8erHMNvDYhzJMsykqShI-13" vertex="1" connectable="0">
+          <mxGeometry x="0.2117" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8erHMNvDYhzJMsykqShI-21" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="8erHMNvDYhzJMsykqShI-9" target="8erHMNvDYhzJMsykqShI-11" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="180" as="sourcePoint" />
+            <mxPoint x="410" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oW9bTyiOn8UcHfKeOKDC-2" value="Smazat svůj účet" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="150" y="310" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oW9bTyiOn8UcHfKeOKDC-3" value="Upravit svůj účet" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="150" y="360" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="oW9bTyiOn8UcHfKeOKDC-4" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="8erHMNvDYhzJMsykqShI-9" target="oW9bTyiOn8UcHfKeOKDC-2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="90" y="310" as="sourcePoint" />
+            <mxPoint x="160" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oW9bTyiOn8UcHfKeOKDC-5" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="8erHMNvDYhzJMsykqShI-9" target="oW9bTyiOn8UcHfKeOKDC-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="320" as="sourcePoint" />
+            <mxPoint x="170" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
