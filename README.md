@@ -1,5 +1,3 @@
 # DuDat-Docs
 
-**TODO:**
-
-- Aktualizovat architekturu webu - Bootstrap => Tailwind
+Meta repo pro [DuDat](https://github.com/Aidam7/DuDat). ✨✨🦄🦄
