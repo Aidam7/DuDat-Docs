@@ -22,13 +22,16 @@
     linkcolor=black,
     urlcolor=black
 }
+\usepackage{dirtree}
 \usepackage{jslistings}
 \usepackage{prismalistings}
+\usepackage{adjustbox}
+\usepackage{graphicx}
 \input{ColorSyntax}
 \renewcommand{\lstlistingname}{Ukázka kódu}
-\renewcommand{\lstlistlistingname}{Seznam ukázek}
+\renewcommand{\lstlistlistingname}{}
 \renewcommand{\figurename}{Obrázek}
-\renewcommand{\listfigurename}{Seznam obrázků}
+\renewcommand{\listfigurename}{}
 
 % Chapter title format
 \titleformat{\chapter}
@@ -103,6 +106,7 @@
       {ź}{{\'z}}1    {Ż}{{\.Z}}1    {ż}{{\.z}}1    {Ž}{{\v{Z}}}1  {ž}{{\^z}}1
       {Ž}{{\^Z}}1
 }
+\sloppy
 \lstset{style=code_style}
 \def\code#1{\texttt{#1}}
 % Document metadata
@@ -132,7 +136,7 @@
 \pagebreak
 \unnumberedsection{Poděkování}
 Chtěl bych poděkovat Ing. Monice Borkovcové, Ph.D. za vedení tohoto maturitního projektu a
-konzultaci problémů. Dále bych chtěl poděkovat Jakubovi Hamplovi za pomoc se složením použitých technonologií.
+konzultaci problémů. Dále bych chtěl poděkovat Jakubovi Hamplovi za pomoc se složením použitých technonologií, Nele Bartákové za pomoc se vzhledem aplikace a Martině Kozlové s Nelou Halfarovou za cennou zpětnou vazbu v rozličných oblastech.
 \pagebreak
 
 % Resumé
@@ -180,19 +184,47 @@ V Pardubicích 31.3.2024
 \input{chapters/technologie}
 \input{chapters/program}
 
+\chapter{Class diagramy}
+% Vypadá na to na prd, ale lepší už to nebude.
+\begin{figure}[hbt!]
+	\includegraphics[width=1\linewidth]{img/ClassDiagramy/src_diagram_export.png}
+	\caption{Class diagram projektu}
+	\label{fig:enter-label}
+\end{figure}
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\linewidth]{img/ClassDiagramy/pages_diagram.png}
+	\caption{Class diagram stránek}
+\end{figure}
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\linewidth]{img/ClassDiagramy/components_diagram.png}
+	\caption{Class diagram komponent}
+\end{figure}
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\linewidth]{img/ClassDiagramy/server_diagram.png}
+	\caption{Class diagram serverové části aplikace}
+\end{figure}
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\linewidth]{img/ClassDiagramy/utils_diagram.png}
+	\caption{Class diagram podpůrných funkcí a rozhraní}
+\end{figure}
+
+
 \chapter{Závěr}
-
+V rámci maturitní práce vznikla aplikace splňující všechny body v zadání, nad rámec zadání byl přidán Streak systém. Aplikace je hostovaná na platformě Vercel\cite{vercel} a databáze je hostovaná na platformě Neon\cite{neon}. Aplikace disponuje správou skupin, úkolů a kategorií. Každý uživatel má přístup pouze do do skupin ve kterých je členem, k úkolům a kategoriím má přístup pouze pokud je členem rodičovské skupiny. Veškerá uživatelem generovaná data mohou být upravovaná tím kdo je vytvořil, kromě úkolů a kategorií, ty může upravovat jejich autor a majitel rodičovské skupiny. 
 % Literature
-\pagebreak
 \chapter{Přílohy}
-
+\let\clearpage\relax
 \section{Literatura}
 \printbibliography[heading=none]
-
-\section{Obrázky, Grafy a Tabulky}
+\section{Obrázky}
+\vspace{-64pt}
 \listoffigures
-
-\section{Ostatní}
+\section{Ukázky}
+\vspace{-48pt}
 \lstlistoflistings
 
 \pagebreak

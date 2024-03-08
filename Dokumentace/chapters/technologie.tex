@@ -1,6 +1,6 @@
 \chapter{Technologie}
 \section{Licence}
-Jednou z prvních věcí kterou musíme zvážit ještě než na projektu začneme pracovat je licence pod kterou projekt bude zpracovávat. Pro projekt byla zvolena MIT Licence, také známá jako Expat nebo X11\cite{GNU-Mit}. MIT Licence vznikla na Massachusettském technologickém institutu roku 1988 a umožňuje ostatním software jakkoliv upravovat a vydávat nové verze programu, i pod jinou licencí, dokud uvedou autora a ponechají původní kód pod MIT Licencí\cite{Github-Mit}.
+Jednou z prvních věcí, kterou musíme zvážit ještě než na projektu začneme pracovat je licence pod kterou projekt bude zpracovávat. Pro projekt byla zvolena MIT Licence, také známá jako Expat nebo X11\cite{GNU-Mit}. MIT Licence vznikla na Massachusettském technologickém institutu roku 1988 a umožňuje ostatním software jakkoliv upravovat a vydávat nové verze programu, i pod jinou licencí, dokud uvedou autora a ponechají původní kód pod MIT Licencí\cite{Github-Mit}.
 \section{Stack}
 V dnešní době je prakticky neomezeně různých způsobů jak si sestavit technologický stack\footnote{Stack je označení pro technologie, které jsou na projektu použity} pro tvorbu full-stackové\footnote{Termín full-stack označuje aplikace, které se skládají jak z klientské části, tedy "Frontend", a ze serverové části, tedy "Backend". Backend a Frontend spolu komunikují za pomoci API.} webové aplikace.
 Pro tvorbu jsem zvolil T3 Stack, T3 Stack skládá dohromady různé poměrně populární technologie na tvorbu full-stack aplikací, ale zároveň při tvoření projektu, za použití \code{create-t3-app} si umožňuje Stack jakkoliv upravit\cite{t3stack}.
@@ -17,7 +17,7 @@ Typescript je kompilovaný jazyk poměrně netradičním způsobem, protože TS 
 Celá uživatelská část aplikace je psaná pomocí nesmírně populárního frameworku Next.js, který je zároveň nadstavba snad ještě populárnějšího frameworku React. T3 Stack automaticky obsahuje Next.js, vzhledem k tomu, že prakticky nemá žádné nevýhody a poskytuje velmi příjemné funkce, které ulehčují vývoj aplikací, například automatickou optimalizaci routování nebo cachování\cite{vercel}.
 
 \subsection{tRPC}
-Pro řešení API, tedy komunikačního kanálu mezi uživatelskou a serverou částí, T3 Stack volí tRPC. tRPC je elegantní způsob jak psát endpointy\footnote{Endpoint = část API, se kterou se dá komunikovat "z venčí"}, na rozdíl od REST API nemusíme v tRPC řešit vracení statusů a postačí nám vyhodit error. Pro typovou validaci dat volí T3 stack knihovnu Zod\cite{zod}.
+Pro řešení API, tedy komunikačního kanálu mezi uživatelskou a serverou částí, T3 Stack volí tRPC. tRPC je elegantní způsob jak psát endpointy\footnote{Endpoint = část API, se kterou se dá komunikovat "z venčí"}. Pro typovou validaci dat volí T3 stack knihovnu Zod\cite{zod}.
 \begin{lstlisting}[caption={Úryvek z "groups" routeru zobrazující mazání skupiny}]
 // Nerelevantní části byly nahrazeny *pseudokódem*
 deleteById: protectedProcedure
@@ -25,10 +25,13 @@ deleteById: protectedProcedure
     .mutation(async ({ ctx, input }) => {
       //*Dostaneme z databáze skupinu s identifikátorem o hodnotě id a uložíme jí do proměnné group*
       //Pokud je group o typu null nebo undefined vrátíme error
-      if (!group) throw new Error("Group not found");
-      //Pokud je id majitele skupiny jiné než id přihlášeného uživatele vrátíme error
+       throw new TRPCError({ code: "NOT_FOUND", message: "Group not found" });
+      //Pokud je id majitele skupiny jiné, než id přihlášeného uživatele vrátíme error
       if (group.ownerId !== ctx.session.user.id)
-        throw new Error("You are not the owner of this group");
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Must be owner of the group",
+        });
       //*Smažeme skupinu v databázi*
     }),
 \end{lstlisting}
@@ -92,12 +95,6 @@ export default {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
-      },
-      colors: {
-        black: "#0B191E",
-        cobalt: "#1D5B72",
-        blue: "#043B62",
-        "neon-blue": "#58C6BE",
       },
     },
   },
