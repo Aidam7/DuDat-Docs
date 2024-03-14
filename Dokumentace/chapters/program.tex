@@ -1,17 +1,18 @@
 \chapter{Aplikace}
-Vzhledem ke komplexnosti aplikace je pro přehlednost rozdělena do několik složek.
+Vzhledem ke komplexnosti aplikace je pro přehlednost rozdělena do několika složek.
 \section{Prisma}
-
-Databázové schéma v jazyku Prisma a databázové migrace se nachází ve složce \code{/prisma/}. Po úpravě Databázové schématu je dobré i vytvořit databázovou migraci, ta nám umožní manuálně spustit SQL příkazy, které Prisma vykonala pokud to bude potřeba. Díky použití Prismy můžeme jak na API tak na Frontendové části aplikace používat identické datové typy, nemusíme tedy, především na Frontendu, definovat vlastní "Interface" pro každý objekt v databázi, který bychom museli pokaždé aktualizovat když se změní databázové schéma, databázové schéma tedy funguje i jako Class Diagram.
-Následuje vizualizace Databázové schématu vygenerovaná pomocí webové aplikace Prismaliser \cite{prismaliser}.
+\label{sec:prisma}
+Databázové schéma v jazyku Prisma a databázové migrace se nachází ve složce \code{/prisma/}. Po úpravě databázové schématu je vhodné i vytvořit databázovou migraci, ta umožní manuálně spustit SQL příkazy, které Prisma vykonala, pokud to bude potřeba. Díky použití Prismy lze jak na API tak na frontendové části aplikace používat identické datové typy, nemusíme, především na Frontendu, definovat vlastní "Interface" pro každý objekt v databázi, který bychom museli pokaždé aktualizovat, když se změní databázové schéma, databázové schéma tedy funguje i jako Class Diagram.
+Následuje vizualizace databázové schématu vygenerovaná pomocí webové aplikace Prismaliser \cite{prismaliser}.
 \begin{figure}[hbt!]
 	\includegraphics[width=1\linewidth]{img/DB_schema.png}
 	\caption{Databázové schéma}
 \end{figure}
 \section{API}
-Jak již zaznělo, celé API je psané za pomocí tRPC, to se nachází ve složce \code{/src/server/api/}.
-API je inicializováno v souborech \code{trpc.ts} a \code{root.ts}. Konktrétně v souboru \code{trpc.ts} inicializujeme objekt tRPC a v \code{root.ts} na něj napojujeme jednotlivé Routery. Samotné "Endpointy", tedy přístupy, jsou rozděleny do "Routerů", ty se nachází ve složce \code{/src/server/api/routers} a dělí se na jednotlivé "hlavní objekty" v databázi. Tyto routery jsou děleny na soubory \code{categories.ts}, \code{groups.ts}, \code{tasks.ts} a \code{users.ts}. V kódu se "Endpointy" označují jako "Procedury", v princpu existují dva druhy procedur; Public\footnote{Veřejná} a Protected\footnote{Chráněná}. Jediným rozdílem mezi nimi je, že Protected procedura zaručuje, že jí může úspěšně zavolat pouze přihlášený uživatel.
-Následuje úryvek z Routeru pro skupiny v souboru \code{groups.ts}. Ostatní procedury byly z ukázky odstraněny.
+\label{sec:api}
+Celé API je psané za pomocí tRPC, to se nachází ve složce \code{/src/server/api/}.
+API je inicializováno v souborech \code{trpc.ts} a \code{root.ts}. Konktrétně v souboru \code{trpc.ts} inicializujeme objekt tRPC a v \code{root.ts} se na něj napojují jednotlivé Routery. Samotné "endpointy", tedy přístupy, jsou rozděleny do "routerů", ty se nachází ve složce \code{/src/server/api/routers} a dělí se na jednotlivé "hlavní objekty" v databázi. Tyto routery jsou děleny na soubory \code{categories.ts}, \code{groups.ts}, \code{tasks.ts} a \code{users.ts}. V kódu se "endpointy" označují jako "procedury", v princpu existují dva druhy procedur; public\footnote{Veřejná} a protected\footnote{Chráněná}. Jediným rozdílem mezi nimi je, že protected procedura zaručuje, že jí může úspěšně zavolat pouze přihlášený uživatel.
+Následuje úryvek z routeru pro skupiny v souboru \code{groups.ts}, ostatní procedury byly z ukázky odstraněny.
 \begin{lstlisting}[caption={Procedura na přidání uživatele do skupiny}]
 import { z } from "zod";
 
@@ -52,8 +53,12 @@ addMember: protectedProcedure
     }),
 })
 \end{lstlisting}
-Jako první musíme definovat název Procedury, v tomto případě "addMember", tedy "přidatUživatele". Dále přidáme \code{.input()} zde bude přijímat procedura data pro své provedení. Pokud bude Procedura data měnit tak přidáme \code{.mutation}, pokud data pouze předá z Databáze tak přidáme \code{.query}. Do těch poté předáme vstup z \code{.input} a \code{ctx}\footnote{Kontext}. Kontext je globálně zpracovávaný a nachází se v něm \code{session} přihlášeného uživatele a \code{prisma}, tou se napojujeme na databázi.
+Jako první je nutné definovat název Procedury, v tomto případě "addMember", tedy "přidatUživatele". Dále přidáme \code{.input()} zde bude procedura přijímat data pro své provedení. Pokud bude Procedura data měnit tak přidáme \code{.mutation}, pokud data pouze předá z databáze, tak přidáme \code{.query}. Do nich poté předáme vstup z \code{.input} a \code{ctx}\footnote{Kontext}. Kontext je globálně zpracovávaný a nachází se v něm \code{session} přihlášeného uživatele a \code{prisma}, tou se napojujeme na databázi.
+\newpage
 \subsection{Příklad API Endpointů}
+
+V následující tabulce se nachází popis vybraných procedur v API.
+
 \begin{tabularx}{1\textwidth} { 
 	| >{\centering\arraybackslash}X 
 	| >{\centering\arraybackslash}X 
@@ -82,10 +87,10 @@ Jako první musíme definovat název Procedury, v tomto případě "addMember", 
 \end{tabularx}
 \newpage
 \section{Next.js}
-Kód, ze kterého se staví Frontendová část aplikace jazykem Next.js se nachází ve složkách \code{src/pages} a \code{src/components}. V \code{pages} se nachází webové stránky, které vidí uživatel, v \code{components} jsou uloženy komponenty, ze kterých se staví jednotlivé stránky.
+Kód, ze kterého se staví frontendová část aplikace pomocí Next.js se nachází ve složkách \code{src/pages} a \code{src/components}. V \code{pages} se nachází webové stránky, které vidí uživatel, v \code{components} jsou uloženy komponenty, ze kterých se staví jednotlivé stránky.
 Obě složky jsou rozděleny do podsložek podle jednotlivých objektů, kterých se týkají, například v \code{src/components/groups} se nachází pouze komponenty, které se týkají skupin.
 \subsection{src/components/}
-Složka je rozdělena na následující podsložky:
+Složka je rozdělena na následujících podsložek:
 \dirtree{%
 	.1 components.
 	.2 auth //komponenty související s autorizací uživatelů. 
@@ -96,7 +101,7 @@ Složka je rozdělena na následující podsložky:
 	.2 users //komponenty související s uživateli.
 }
 \hfill \break
-Jednotlivé podsložky jsou následně rozděleny na komponenty, které mají každý svou vlastní složku.
+Jednotlivé podsložky jsou následně rozděleny na komponenty, které mají každá svou vlastní složku.
 Ve složce pro komponentu se nachází soubor \code{index.tsx} a \code{názevKomponenty.tsx}.
 \hfill \break
 Finálně tedy struktura adresáře vypadá následovně:
@@ -116,7 +121,7 @@ Abychom mohli komponentu na stránce použít musíme ji importovat pomocí př�
 \begin{lstlisting}
     import PageHeader from "~/components/layout/pageHeader/pageHeader";
 \end{lstlisting}
-Můžeme vidět, že v příkazu máme zdvojeně název komponenty to se děje, protože máme komponenty rozdělené do jednotlivých složek a poté je máme pojmenované jménem. Jedním z řešení, jak dosáhnout \code{import}u co vypadá následovně je přejmenovat komponenty z názvu na \code{index.tsx}.
+Zde je patrné, že v příkazu máme zdvojeně název komponenty, protože máme komponenty rozdělené do jednotlivých složek a poté je máme pojmenované jménem. Jedním z řešení, jak dosáhnout \code{import}u, co vypadá následovně je přejmenovat komponenty z názvu na \code{index.tsx}.
 \begin{lstlisting}
     import PageHeader from "~/components/layout/pageHeader/";
 \end{lstlisting}
@@ -131,8 +136,8 @@ Adresář by tedy vypadal následovně:
 	.3 pages.
 }
 
-Pokud bychom přejmenovali naše komponenty na \code{index.tsx} tak sice dosáhneme požadovaného výsledku, ale pokud bychom ve vývojovém prostředí měli otevřeno několik komponent byl by problém se v projektu zorientovat.
-Proto místo přejmenování komponent na \code{index.tsx} ponecháme soubor pojmenovaný názvem komponent a vytvoříme pro každou komponentu jejich vlastní soubor \code{index.tsx}, tímto způsobem docílíme nezdvojené adresy v \code{import}u, protože když \code{import} dostane jako cestu složku automaticky vybere soubor s názvem \code{index.tsx}. Následně v souboru \code{index.tsx} musíme importovat komponentu, které se týká a tu dále exportovat. Složka komponenty a její soubory tedy vypadají následovně, irelevantní části kódu byly vynechány.
+Pokud bychom přejmenovali komponenty na \code{index.tsx} tak sice dosáhneme požadovaného výsledku, ale pokud bychom ve vývojovém prostředí měli otevřeno několik komponent, byl by problém se v projektu zorientovat.
+Proto místo přejmenování komponent na \code{index.tsx} ponecháme soubor pojmenovaný názvem komponent a vytvoříme pro každou komponentu jejich vlastní soubor \code{index.tsx}, tímto způsobem docílíme nezdvojené adresy v \code{import}u, protože když \code{import} dostane jako cestu složku automaticky vybere soubor s názvem \code{index.tsx}. Následně v souboru \code{index.tsx} musíme importovat komponentu, které se týká a tu dále exportovat. Složka komponenty a její soubory vypadají následovně, irelevantní části kódu byly vynechány.
 \begin{lstlisting}[caption=Deklarace komponenty pageHeader]
 ...
 const PageHeader: React.FC<Props> = (props: Props) => {
@@ -164,7 +169,7 @@ Struktura adresáře \code{pages} vypadá následovně:
 Ve složce \code{api} se nachází soubory pro inicializaci API a NextAuth na Frontendu, dále se zde nachází stránka \code{panel.ts}. K té je povolen přístup pouze ve vývojovém prostředí, jinak vždy vrací kód 404. Stránka byla použita během vývoje na testování API. NextAuth je incializován v souboru \code{/auth/[...nextauth].ts} a tRPC je inicalizováno v \code{/trpc/[trpc].ts}.
 
 \subsubsection{\_app.tsx}
-Soubor \code{\_app.tsx} je stavební kámen celé uživatelské části aplikace, tato stránka funguje, v podstatě, jako šablona pro všechny stránky aplikace. Na stránce pomocí komponenty \code{checkAuth} aplikace kontroluje na všech stránkách, kromě stránky index, zda je uživatel přihlášen a pokud ne, zobrazí uživateli pouze žádost o to, aby se přihlásil.
+Soubor \code{\_app.tsx} je stavební kámen celé uživatelské části aplikace, tato stránka funguje, jako šablona pro všechny stránky aplikace. Na stránce pomocí komponenty \code{checkAuth} aplikace kontroluje na všech stránkách, kromě stránky index, zda je uživatel přihlášen a pokud ne, zobrazí uživateli pouze žádost o to, aby se přihlásil.
 
 \begin{lstlisting}[caption=Komponenta CheckAuth]
 ...
@@ -196,25 +201,33 @@ CheckAuth přijímá jako parametr \code{children}, tedy děti, ty komponentě n
     </CheckAuth>
 \end{lstlisting}
 \section{Rozvržení uživatelských práv}
-Uživatelé se nacházejí, po přidání vlastníkem, ve skupinách, skupiny mají pod sebou úkoly a kategorie. Aby byl uživateli vylepšen prvotní zážitek při používání aplikace, tak mu je automaticky s účtem i vytvořena skupina. Samozřejmě si uživatelé mohou v aplikaci tvořit nové skupiny. Ve skupinách poté mohou vytvářet úkoly a kategorie, kategorie mohou být přiřazeny jednotlivým úkolům. Majitelé skupin mohou upravovat členství uživatelů ve skupině, vlastnosti skupiny, jako například název nebo převést skupinu na dalšího uživatele. U úkolů a kategorií mohou úpravy provázet jen autoři a také majitel skupiny pod kterou spadají. Po odebrání, nebo odchodu uživatele ze skupiny, se veškeré úkoly převedou na majitele skupiny. Následuje vizualizace práv v aplikaci za pomocí UseCase diagramů. Pro přehlednost byl UseCase diagram rozdělen na dvě části, první část se týká aplikace jako celku a druhá se týká jednotlivých práv ve skupině.
+Uživatelé se nacházejí, po přidání vlastníkem, ve skupinách, skupiny mají pod sebou úkoly a kategorie. Aby byl uživateli vylepšen prvotní zážitek při používání aplikace, tak mu je automaticky s účtem i vytvořena skupina. Samozřejmě si uživatelé mohou v aplikaci spravovat nové skupiny. Ve skupinách poté mohou vytvářet úkoly a kategorie, kategorie mohou být přiřazeny jednotlivým úkolům. Majitelé skupin mohou upravovat členství uživatelů ve skupině, vlastnosti skupiny, jako například název nebo převést skupinu na dalšího uživatele. 
+
+U úkolů a kategorií mohou úpravy provázet jen autoři a také majitel skupiny pod kterou spadají. Po odebrání, nebo odchodu uživatele ze skupiny, se veškeré úkoly převedou na majitele skupiny. 
+\newpage
+\subsection{Diagramy}
+Pro přehlednost byl UseCase diagram rozdělen na dvě části, UseCase diagram aplikace a UseCase diagram v zobrazení skupiny.
 
 \begin{figure}[hbt!]
-	\includegraphics[width=1\linewidth]{img/UseCaseAplikace.png}
+	\includegraphics[width=0.8\linewidth]{img/UseCaseAplikace.png}
 	\caption{UseCase Diagram aplikace}
 \end{figure}
 
+Následující UseCase diagram zobrazuje akce, které mohou uživatelé provádět ve skupině.
 \begin{figure}[hbt!]
-	\includegraphics[width=1\linewidth]{img/UseCaseSkupina.png}
+	\includegraphics[height=0.7\textwidth]{img/UseCaseSkupina.png}
 	\caption{UseCase Diagram skupiny}
 \end{figure}
 \clearpage
 \section{Uživatelské rozhraní}
-Uživatelské rozhraní aplikace je poměrně jednoduché, na vrchu aplikace se nachází navigační panel. V navigačním panelu se nachází název aplikace, odkaz na úkoly, kalendář a skupiny přihlášeného uživatele. Pokud uživatel není přihlášen tak se v navigačním panelu nachází i tlačítko pro přihlášení, jakmile se uživatel přihlásí tak tlačítko zmizí a je nahrazeno jeho profilovým obrázkem, ten slouží jako odkaz na stránku uživatele. Výchozí nastavení, které používá T3 Stack je uložit odkaz na profilový obrázek z účtu, pomocí kterého se přihlásil uživatel do aplikace. Toto řešení je poměrně "nešťastné", protože při každém vstupu do aplikace se musí provést volání na externí službu kde aplikace uživatelův obrázek stáhne, při tomto procesu se může mnohé pokazit. Z t tohoto důvodu jsem se rozhodl použít pro generaci profilových obrázků knihovnu \code{Dicebear}\cite{dicebear}.
+Uživatelské rozhraní aplikace je poměrně jednoduché v horní části aplikace se nachází navigační panel. V navigačním panelu se nachází název aplikace, odkaz na úkoly, kalendář a skupiny přihlášeného uživatele. Pokud uživatel není přihlášen tak se v navigačním panelu nachází i tlačítko pro přihlášení, jakmile se uživatel přihlásí tak tlačítko zmizí a je nahrazeno jeho profilovým obrázkem, ten slouží jako odkaz na stránku uživatele. 
+
+Výchozí nastavení, které používá T3 Stack je uložit odkaz na profilový obrázek z účtu, pomocí kterého se přihlásil uživatel do aplikace. Toto řešení je poměrně "nešťastné", protože při každém vstupu do aplikace se musí provést volání na externí službu, kde aplikace uživatelův obrázek stáhne. Z tohoto důvodu jsem se rozhodl použít pro generování profilových obrázků knihovnu \code{DiceBear}\cite{dicebear}. Tato knihovna poskytuje rozhraní pro vytváření různých avatarů formátu SVG.
 
 \subsection{Registrace do aplikace}
-Jakmile NextAuth zachytí událost, tedy "Event", registrace nového uživatele tak zavolá tuto knihovnu a ta mu vytvoří nový profilový obrázek, ten je následně převeden na text a uložen do databáze. Jako "seed" pro generaci je použito uživatelovo \code{ID} a jako skupinu avatarů aplikace používá "lorelei-neutral"\cite{lorelei-neutral}. Při odchytnutí nového uživatele je také pro tohoto uživatele automaticky vytvořena nová skupina.
+Jakmile NextAuth zachytí událost typu registrace nového uživatele, tak zavolá tuto knihovnu a ta mu vytvoří nový profilový obrázek, ten je následně převeden na text a uložen do databáze. Jako "seed" pro generaci je použito uživatelovo \code{ID} a jako skupinu avatarů aplikace používá "lorelei-neutral"\cite{lorelei-neutral}. Při odchytnutí nového uživatele je také pro tohoto uživatele automaticky vytvořena nová skupina.
 
-Jakmile je na serveru zachycena událost Na serveru je zachytávána každá událost\footnote{Tedy "Event"} o vytvoření nového uživatele. NextAuth tento Event vyvolá pokaždé co se zaregistruje nový uživatel do aplikace a můžeme tak na toto reagovat, nový záznam v Databázi je pro uživatele NextAuthem automaticky vytvořen. Při vytvoření uživatele je tedy vygenerován nový uživatelský obrázek pomocí knihovny Dicebear, jako "seed"\footnote{Seed je způsob jak ovlivnit generaci náhodných objektů} je použito uživatelovo \code{ID}. Po vygenerování obrázku je obrázek převeden na \code{DataURI} a uložen do databáze. Po uložení obrázku je uživatelovi dále vytvořena první skupina, ta je vytvořena pro ulehčení a zjednodušení prvního vstupu do aplikace.
+Jakmile je na serveru zachycena událost\footnote{Tedy "Event"} o vytvoření nového uživatele, NextAuth tento Event vyvolá pokaždé co se zaregistruje nový uživatel do aplikace vytvoří se nový záznam v databázi. Při vytvoření uživatele je vygenerován nový uživatelský obrázek pomocí knihovny DiceBear. Po vygenerování obrázku je obrázek převeden na \code{DataURI} a uložen do databáze. Po uložení obrázku je uživatelovi dále vytvořena první skupina, ta je vytvořena pro ulehčení a zjednodušení prvního vstupu do aplikace.
 
 \begin{figure}[hbt!]
 	\includegraphics[width=1\linewidth]{img/neprihlasenyNavbar.png}
@@ -232,13 +245,13 @@ Na každé stránce, která není úvodní, je nepřihlášený uživatel požá
 	\includegraphics[width=1\linewidth]{img/signIn.png}
 	\caption{Stránka se žádostí o přihlášení}
 \end{figure}
-Na stránku skupiny, úkolu a kategorie se dostanou pouze členové dané skupiny, v majitelově zobrazení se místo tlačítka pro opuštění skupiny zobrazí tlačítko pro vstup do nastavení skupiny.
+Na stránku skupiny, úkolu a kategorie se dostanou pouze členové dané skupiny, vlastníkovi se místo tlačítka pro opuštění skupiny zobrazí tlačítko pro vstup do nastavení skupiny.
 \begin{figure}[hbt!]
 	\centering
 	\includegraphics[width=1\linewidth]{img/groupPage.png}
 	\caption{Zobrazení skupiny z pohledu člena}
 \end{figure}
-Na stránkách skupiny vidíme výpis úkolů, přání, kategorií a ostatních členů v dané skupině. Jako přání je v aplikaci brán jakákoliv úkol, který nemá nikoho přiřazeného k sobě, zobrazují se tedy odděleně. Na stránkách úkolu vidíme přiřazené uživatele, možnost se "odhlásit" nebo "přihlásit" k dělání úkolu, tlačítko pro dokončení úkolu, kategorie a indikátor do kdy má být daný úkol hotov. Autor úkolu a majitel skupiny dále vidí panel pro nastavení kde může úkol upravit a potvrdit ho jako vypracovaný.
+Na stránkách skupiny vidíme výpis úkolů, přání, kategorií a ostatních členů v dané skupině. Na stránkách úkolu vidíme přiřazené uživatele, možnost se "odhlásit" nebo "přihlásit" k plnění úkolu, tlačítko pro dokončení úkolu, kategorie a indikátor do kdy má být daný úkol hotov. Autor úkolu a majitel skupiny dále vidí panel pro nastavení, kde může úkol upravit a potvrdit ho jako vypracovaný.
 
 \begin{figure}[hbt!]
 	\centering
@@ -247,7 +260,7 @@ Na stránkách skupiny vidíme výpis úkolů, přání, kategorií a ostatních
 \end{figure}
 
 
-Když je na vypracování úkolu stále čas tak je indikátor modrý, jakmile se blíží konec lhůty na vypracování, konkrétně když zbývá méně než \(1/10\) času, indikátor zežloutne a po překročení lhůty je indikátor červený.
+Když je na vypracování úkolu stále čas, tak je indikátor modrý, jakmile se blíží konec lhůty na vypracování, konkrétně když zbývá méně než \(1/10\) času, indikátor zežloutne a po překročení lhůty je indikátor červený.
 
 \begin{figure}[hbt!]
 	\centering
@@ -255,7 +268,7 @@ Když je na vypracování úkolu stále čas tak je indikátor modrý, jakmile s
 	\caption{Zobrazení opožděného úkolu z pohledu uživatele}
 \end{figure}
 
-Po potvrzení autorem, nebo majitelem skupiny, že byl úkol vypracován tak je indikátor vyšrafován, pokud byl úkol dokončen v čas tak zezelená, jinak zůstane červený a nad indikátorem se zobrazí text kdy byl úkol dokončen, ne kdy byl potvrzen jako dokončený.
+Po potvrzení autorem, nebo majitelem skupiny, že byl úkol vypracován, tak je indikátor vyšrafován. Pokud byl úkol dokončen v čas tak zezelená, jinak zůstane červený a nad indikátorem se zobrazí text, kdy byl úkol dokončen, ne kdy byl potvrzen jako dokončený.
 
 \begin{figure}[hbt!]
 	\centering
@@ -263,7 +276,24 @@ Po potvrzení autorem, nebo majitelem skupiny, že byl úkol vypracován tak je 
 	\caption{Zobrazení indikátoru u úkolu, který byl potvrzen a včas odevzdán}
 \end{figure}
 
+Dále se v aplikaci nachází i zobrazení kalendáře na stránce \code{tasks/calendar/}. Kalendář je řešen knihovnou \code{react-big-calendar}. Položky v kalendáři odkazují na svou stránku, dále se mění jejich zbarvení stejně jako v indikátoru na stránce úkolů.
 
+\subsection{Úkoly x Přání}
+
+Jako přání je v aplikaci brán jakýkoliv úkol, který nemá nikoho přiřazeného k sobě, zobrazují se tedy odděleně. Úkol je automaticky převeden na přání jakmile se odhlásí poslední člen od jeho plnění nebo pokud při vytváření nového úkolu zaškrtneme možnost, že se jedná o přání, v tom případě není po vytvoření automaticky přiřazen autor k plnění úkolu.
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=1\linewidth]{img/taskCreate.png}
+    \caption{Formulář pro vytvoření úkolu, který bude považován za přání}
+\end{figure}
+\newpage
 Na stránce uživatele je kromě jejich jména a profilového obrázku zobrazeno grafové vyjádření, které porovnává počet úkolů, které splnil daný uživatel včas a počet úkolů, které odevzdal pozdě. Dále se zde nachází zobrazení takzvaného "Streak" systému, tedy jak dlouho to je, co uživatel odevzdal úkol pozdě. Pokud je uživatel na vlastní stránce tak se zde nachází tlačítko pro odhlášení a vstup na nastavení. V nastavení si může uživatel smazat svůj účet a změnit jméno.
 
-Dále se v aplikaci nachází i zobrazení kalendáře na stránce \code{tasks/calendar/}. Kalendář je řešen knihovnou \code{react-big-calendar}. Položky v kalendáři odkazují na svou stránku, dále se mění jejich zbarvení stejně jako v indikátoru na stránce úkolů.
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[height=0.5\textheight]{img/userPage.png}
+	\caption{Zobrazení uživatelské stránky}
+\end{figure}
+
+Než bude uživateli dovoleno smazat svůj účet je potřeba, aby převedl veškeré skupiny, které vlastní na jiného uživatele nebo, aby skupinu smazal. Skupinu majitel převede na jiného uživatele v nastavení skupiny. Jakmile si uživatel smaže účet jsou všechny úkoly a kategorie, které vytvořil převedeny na majitele mateřské skupiny.
