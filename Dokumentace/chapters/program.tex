@@ -1,8 +1,8 @@
 \chapter{Aplikace}
-Vzhledem ke komplexnosti aplikace je pro přehlednost rozdělena do několika složek.
+Vzhledem ke komplexnosti aplikace je pro přehlednost rozdělena do několika složek. Podobným způsobem byly rozděleny Class diagramy projektu, 
 \section{Prisma}
 \label{sec:prisma}
-Databázové schéma v jazyku Prisma a databázové migrace se nachází ve složce \code{/prisma/}. Po úpravě databázové schématu je vhodné i vytvořit databázovou migraci, ta umožní manuálně spustit SQL příkazy, které Prisma vykonala, pokud to bude potřeba. Díky použití Prismy lze jak na API tak na frontendové části aplikace používat identické datové typy, nemusíme, především na Frontendu, definovat vlastní "Interface" pro každý objekt v databázi, který bychom museli pokaždé aktualizovat, když se změní databázové schéma, databázové schéma tedy funguje i jako Class Diagram.
+Databázové schéma v jazyku Prisma a databázové migrace se nachází ve složce \code{/prisma/}. Po úpravě databázové schématu je vhodné i vytvořit databázovou migraci, ta umožní manuálně spustit SQL příkazy, které Prisma vykonala, pokud to bude potřeba. Díky použití Prismy lze jak na API tak na frontendové části aplikace používat identické datové typy, nemusíme, především na Frontendu, definovat vlastní "Interface" pro každý objekt v databázi, který bychom museli pokaždé aktualizovat, když se změní databázové schéma, databázové schéma tedy může fungovat i jako Class diagram.
 Následuje vizualizace databázové schématu vygenerovaná pomocí webové aplikace Prismaliser \cite{prismaliser}.
 
 \begin{landscape}
@@ -61,9 +61,10 @@ Jako první je nutné definovat název Procedury, v tomto případě "addMember"
 \newpage
 \subsection{Příklad API Endpointů}
 
-V následující tabulce se nachází popis vybraných procedur v API.
-
-\begin{tabularx}{1\textwidth} { 
+Následující tabulka zobrazuje vybrané API Endpointy, z každého routeru, který se v aplikaci nachází dva Endpointy. Tyto Endpointy byly vybrány vzhledem k jejich četnosti výskytu v aplikaci, ale také vzhledem k jejich rozmanitosti přijímaných a vracených dat.
+\begin{table}[hbt!]
+    \centering
+    \begin{tabularx}{1\textwidth} { 
 	| >{\centering\arraybackslash}X 
 	| >{\centering\arraybackslash}X 
 	| >{\centering\arraybackslash}X 
@@ -89,6 +90,10 @@ V následující tabulce se nachází popis vybraných procedur v API.
 	users.ts        & editName        & Upraví jméno uživatele                                       & ID uživatele, Nové jméno          & User             \\
 	\hline
 \end{tabularx}
+    \caption{Příklad API Endpointů}
+    \label{tab:my_label}
+\end{table}
+
 \newpage
 \section{Next.js}
 Kód, ze kterého se staví frontendová část aplikace pomocí Next.js se nachází ve složkách \code{src/pages} a \code{src/components}. V \code{pages} se nachází webové stránky, které vidí uživatel, v \code{components} jsou uloženy komponenty, ze kterých se staví jednotlivé stránky.
