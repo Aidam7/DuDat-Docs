@@ -181,9 +181,10 @@ V Pardubicích 4.2.2024
 \setcounter{section}{1}
 \pagenumbering{arabic}
 \chapter{Úvod}
-V dnešní hektické době potřebuje mnoho lidí používat různé zápisníky, aby měli jistotu, že nezapomenou jak na každodenní úkoly tak na různé schůzky nebo například návštěvy u doktora. Elektronické zápisníky, tedy TODO aplikace, jsou důležité nejen pro jednotlivce, ale i pro rodiny nebo týmy ve firmách.
+Na internetu lze nalézt mnoho TODO aplikací, tedy zápisníků, které cílí buďto na jednotlivce nebo na skupiny. Problém nastává, jakmile má uživatel zájem o zapisování si vlastních úkolů a zároveň úkolování skupiny, ať už v práci nebo rodiny, je tedy nucen často používat dvě oddělené aplikace. Aplikace na trhu také bývají velmi strohé nebo naopak příliš komplexní a tedy placené. 
+\newline
 
-Cílem práce je vytvořit intuitivní TODO aplikaci s webovým rozhraním, která umožňuje rychlou správu úkolů, přání a jejich dělení do různých kategorií. Uživatelé aplikace se vzájemně přidávají do skupin ve kterých si mohou úkoly či přání zadávat.
+Cílem práce je vytvořit intuitivní TODO aplikaci s webovým rozhraním, která umožňuje rychlou správu úkolů, přání a jejich dělení do různých kategorií. Uživatelé aplikace se vzájemně přidávají do skupin, ve kterých si mohou úkoly či přání zadávat. Úkoly mohou mít časová omezení a uživatelé, kteří plní tyto úkoly je vidí v zabudovaném kalendáři.
 
 % Content
 \input{chapters/porovnaniTrhu}
@@ -191,7 +192,13 @@ Cílem práce je vytvořit intuitivní TODO aplikaci s webovým rozhraním, kter
 \input{chapters/program}
 
 \chapter{Závěr}
-V rámci maturitní práce vznikla aplikace splňující všechny body v zadání, nad rámec zadání byl přidán Streak systém. Aplikace je hostovaná na platformě Vercel\cite{vercel} a databáze je hostovaná na platformě Neon\cite{neon}. Aplikace disponuje správou skupin, úkolů a kategorií. Každý uživatel má přístup pouze do do skupin ve kterých je členem, k úkolům a kategoriím má přístup pouze pokud je členem rodičovské skupiny. Veškerá uživatelem generovaná data mohou být upravovaná tím kdo je vytvořil, kromě úkolů a kategorií, ty může upravovat jejich autor a majitel rodičovské skupiny. 
+Cílem práce bylo vytvořit intuitivní TODO aplikaci s webovým rozhraním. Aplikace disponuje všemi požadovanými systémy, kterými byly skupiny, úkoly, přání a kalendář. Uživatelé tvoří skupiny, do kterých se vzájemně přidávají, majitelé skupin mohou uživatelům skupinu předat nebo je ze skupiny odstranit. Uživatelé si v skupinách vzájemně zadávají úkoly nebo se hlásí k plnění přání. Časově omezené úkoly se zobrazují v zabudovaném kalendáři. Veškerá uživatelem generovaná data mohou být upravena autorem nebo majitelem skupiny, dále mohou všichni členové skupiny úkol či přání naklonovat. Na profilu každého uživatele je grafové znázornění kolik úkolů dokončil v čas, oproti kolik úkolů dokončil pozdě a jejich "Streak"; "Streak" systém byl přidán nad rámec zadání.
+
+Aplikace je hostovaná na platformě Vercel\cite{vercel} a databáze je hostovaná na platformě Neon\cite{neon}.
+
+V rámci práce jsem se naučil s novými technologiemi jako je Prisma, tRPC, NextAuth a TailwindCSS. Dále jsem získal hlubší porozumění s technologiemi Next.js, React a Typescript.
+
+Do budoucna bych chtěl, například, umožnit uživatelům měnit časová omezení úkolů přímo v kalendáři pomocí "drag and drop"\footnote{"Táhni a pusť"} systému.
 % Literature
 \chapter{Přílohy}
 
