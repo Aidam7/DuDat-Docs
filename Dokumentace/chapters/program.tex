@@ -4,12 +4,16 @@ Vzhledem ke komplexnosti aplikace je pro přehlednost rozdělena do několika sl
 \label{sec:prisma}
 Databázové schéma v jazyku Prisma a databázové migrace se nachází ve složce \code{/prisma/}. Po úpravě databázové schématu je vhodné i vytvořit databázovou migraci, ta umožní manuálně spustit SQL příkazy, které Prisma vykonala, pokud to bude potřeba. Díky použití Prismy lze jak na API tak na frontendové části aplikace používat identické datové typy, nemusíme, především na Frontendu, definovat vlastní "Interface" pro každý objekt v databázi, který bychom museli pokaždé aktualizovat, když se změní databázové schéma, databázové schéma tedy funguje i jako Class Diagram.
 Následuje vizualizace databázové schématu vygenerovaná pomocí webové aplikace Prismaliser \cite{prismaliser}.
-\begin{figure}[hbt!]
+
+\begin{landscape}
+\begin{figure}[hbt]
 	\includegraphics[width=1\linewidth]{img/DB_schema.png}
 	\caption{Databázové schéma}
 \end{figure}
+\end{landscape}
 \section{API}
 \label{sec:api}
+
 Celé API je psané za pomocí tRPC, to se nachází ve složce \code{/src/server/api/}.
 API je inicializováno v souborech \code{trpc.ts} a \code{root.ts}. Konktrétně v souboru \code{trpc.ts} inicializujeme objekt tRPC a v \code{root.ts} se na něj napojují jednotlivé Routery. Samotné "endpointy", tedy přístupy, jsou rozděleny do "routerů", ty se nachází ve složce \code{/src/server/api/routers} a dělí se na jednotlivé "hlavní objekty" v databázi. Tyto routery jsou děleny na soubory \code{categories.ts}, \code{groups.ts}, \code{tasks.ts} a \code{users.ts}. V kódu se "endpointy" označují jako "procedury", v princpu existují dva druhy procedur; public\footnote{Veřejná} a protected\footnote{Chráněná}. Jediným rozdílem mezi nimi je, že protected procedura zaručuje, že jí může úspěšně zavolat pouze přihlášený uživatel.
 Následuje úryvek z routeru pro skupiny v souboru \code{groups.ts}, ostatní procedury byly z ukázky odstraněny.

@@ -15,6 +15,7 @@
 \usepackage{chngcntr}
 \usepackage{csquotes}
 \usepackage{tabularx}
+\usepackage{pdflscape}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -147,7 +148,7 @@ Systém zahrnuje uživatele, kteří jsou rozděleni do skupin, které si sami z
 \unnumberedsection{Klíčová slova}
 Next.js, Typescript, Prisma, tRPC, PostgreSQL, Webová aplikace, Úkoly
 \unnumberedsection{Annotation}
-The project aims to create a web application for task management with a web interface. Users are divided into groups that they create themselves, allowing them to assign tasks within the group. Users can either assign tasks to themselves or to other members within the group. Tasks are categorized, and users within the group can create these categories. Group modifications are restricted to the group's creator, while task and category modifications are limited to their respective creators and the parent group owner.
+The aim of the project is to create an application for task management with a web interface. The system includes users who are divided into groups that they create themselves. Within these groups, users can assign tasks to themselves or to other users in the group. Another requirement is that tasks can be categorized, which users within the group create. Only the founder of a group can modify it, and only the author and the founder of the parent group can modify a task and its category. The application also features calendar integration, allowing tasks to be scheduled for different time periods.
 
 \unnumberedsection{Keywords}
 Next.js, Typescript, Prisma, tRPC, PostgreSQL, Web Application, Tasks
@@ -178,19 +179,30 @@ V Pardubicích 31.3.2024
 \setcounter{page}{1}
 \setcounter{section}{1}
 \pagenumbering{arabic}
+\chapter{Úvod}
+V dnešní hektické době potřebuje mnoho lidí používat různé zápisníky, aby měli jistotu, že nezapomenou jak na každodenní úkoly tak na různé schůzky nebo například návštěvy u doktora. Elektronické zápisníky, tedy TODO aplikace, jsou důležité nejen pro jednotlivce, ale i pro rodiny nebo týmy ve firmách.
+
+Cílem práce je vytvořit intuitivní TODO aplikaci s webovým rozhraním, která umožňuje rychlou správu úkolů, přání a jejich dělení do různých kategorií. Uživatelé aplikace se vzájemně přidávají do skupin ve kterých si mohou úkoly či přání zadávat.
 
 % Content
 \input{chapters/porovnaniTrhu}
 \input{chapters/technologie}
 \input{chapters/program}
 
-\chapter{Class diagramy}
+\chapter{Závěr}
+V rámci maturitní práce vznikla aplikace splňující všechny body v zadání, nad rámec zadání byl přidán Streak systém. Aplikace je hostovaná na platformě Vercel\cite{vercel} a databáze je hostovaná na platformě Neon\cite{neon}. Aplikace disponuje správou skupin, úkolů a kategorií. Každý uživatel má přístup pouze do do skupin ve kterých je členem, k úkolům a kategoriím má přístup pouze pokud je členem rodičovské skupiny. Veškerá uživatelem generovaná data mohou být upravovaná tím kdo je vytvořil, kromě úkolů a kategorií, ty může upravovat jejich autor a majitel rodičovské skupiny. 
+% Literature
+\chapter{Přílohy}
+\begin{landscape}
+\section{Class diagramy}
+
 % Vypadá na to na prd, ale lepší už to nebude.
 \begin{figure}[hbt!]
-	\includegraphics[width=1\linewidth]{img/ClassDiagramy/src_diagram_export.png}
+	\includegraphics[width=1\linewidth, height=0.55\linewidth]{img/ClassDiagramy/src_diagram_export.png}
 	\caption{Class diagram projektu}
 	\label{fig:enter-label}
 \end{figure}
+\pagebreak
 \begin{figure}[hbt!]
 	\centering
 	\includegraphics[width=1\linewidth]{img/ClassDiagramy/pages_diagram.png}
@@ -201,6 +213,7 @@ V Pardubicích 31.3.2024
 	\includegraphics[width=1\linewidth]{img/ClassDiagramy/components_diagram.png}
 	\caption{Class diagram komponent}
 \end{figure}
+\pagebreak
 \begin{figure}[hbt!]
 	\centering
 	\includegraphics[width=1\linewidth]{img/ClassDiagramy/server_diagram.png}
@@ -212,17 +225,16 @@ V Pardubicích 31.3.2024
 	\caption{Class diagram podpůrných funkcí a rozhraní}
 \end{figure}
 
-
-\chapter{Závěr}
-V rámci maturitní práce vznikla aplikace splňující všechny body v zadání, nad rámec zadání byl přidán Streak systém. Aplikace je hostovaná na platformě Vercel\cite{vercel} a databáze je hostovaná na platformě Neon\cite{neon}. Aplikace disponuje správou skupin, úkolů a kategorií. Každý uživatel má přístup pouze do do skupin ve kterých je členem, k úkolům a kategoriím má přístup pouze pokud je členem rodičovské skupiny. Veškerá uživatelem generovaná data mohou být upravovaná tím kdo je vytvořil, kromě úkolů a kategorií, ty může upravovat jejich autor a majitel rodičovské skupiny. 
-% Literature
-\chapter{Přílohy}
+\pagebreak
+\end{landscape}
 \let\clearpage\relax
 \section{Literatura}
 \printbibliography[heading=none]
+\pagebreak
 \section{Obrázky}
 \vspace{-64pt}
 \listoffigures
+\pagebreak
 \section{Ukázky}
 \vspace{-48pt}
 \lstlistoflistings
