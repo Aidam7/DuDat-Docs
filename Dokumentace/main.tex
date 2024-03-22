@@ -201,42 +201,9 @@ V rámci práce jsem se naučil s novými technologiemi jako je Prisma, tRPC, Ne
 Do budoucna bych chtěl, například, umožnit uživatelům měnit časová omezení úkolů přímo v kalendáři pomocí "drag and drop"\footnote{"Táhni a pusť"} systému.
 % Literature
 \chapter{Přílohy}
+\pagenumbering{gobble}
 
-\begin{landscape}
 
-\section{Class diagramy}
-
-% Vypadá na to na prd, ale lepší už to nebude.
-\begin{figure}[hbt!]
-	\includegraphics[width=1\linewidth, height=0.55\linewidth]{img/ClassDiagramy/src_diagram_export.png}
-	\caption{Class diagram projektu}
-	\label{fig:enter-label}
-\end{figure}
-\pagebreak
-\begin{figure}[hbt!]
-	\centering
-	\includegraphics[width=1\linewidth]{img/ClassDiagramy/pages_diagram.png}
-	\caption{Class diagram stránek}
-\end{figure}
-\begin{figure}[hbt!]
-	\centering
-	\includegraphics[width=1\linewidth]{img/ClassDiagramy/components_diagram.png}
-	\caption{Class diagram komponent}
-\end{figure}
-\pagebreak
-\begin{figure}[hbt!]
-	\centering
-	\includegraphics[width=1\linewidth]{img/ClassDiagramy/server_diagram.png}
-	\caption{Class diagram serverové části aplikace}
-\end{figure}
-\begin{figure}[hbt!]
-	\centering
-	\includegraphics[width=1\linewidth]{img/ClassDiagramy/utils_diagram.png}
-	\caption{Class diagram podpůrných funkcí a rozhraní}
-\end{figure}
-
-\pagebreak
-\end{landscape}
 \let\clearpage\relax
 \section{Literatura}
 \printbibliography[heading=none]
@@ -250,5 +217,44 @@ Do budoucna bych chtěl, například, umožnit uživatelům měnit časová omez
 \lstlistoflistings
 
 \pagebreak
+\sloppy
+\begin{landscape}
+\section{Class diagramy}
+\label{sec:CD}
+% Vypadá na to na prd, ale lepší už to nebude.
+\begin{figure}[hbt!]
+	\includegraphics[width=1\linewidth, height=0.55\linewidth]{img/ClassDiagramy/src_diagram_export.png}
+	\caption{Class diagram projektu}
+	\label{fig:enter-label}
+\end{figure}
+\pagebreak
+
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\linewidth]{img/ClassDiagramy/pages_diagram.png}
+	\caption{Class diagram stránek}
+\end{figure}
+\newpage
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\linewidth]{img/ClassDiagramy/components_diagram.png}
+	\caption{Class diagram komponent}
+\end{figure}
+\pagebreak
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\linewidth]{img/ClassDiagramy/server_diagram.png}
+	\caption{Class diagram serverové části aplikace}
+\end{figure}
+\newpage
+\begin{figure}[hbt!]
+	\centering
+	\includegraphics[width=1\linewidth]{img/ClassDiagramy/utils_diagram.png}
+	\caption{Class diagram podpůrných funkcí a rozhraní}
+\end{figure}
+
+\pagebreak
+\end{landscape}
+
 
 \end{document}

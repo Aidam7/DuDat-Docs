@@ -1,8 +1,10 @@
 \chapter{Aplikace}
-Vzhledem ke komplexnosti aplikace je pro přehlednost rozdělena do několika složek. Podobným způsobem byly rozděleny Class diagramy projektu, 
+
+Vzhledem ke komplexnosti aplikace je pro přehlednost rozdělena do několika složek. Podobným způsobem byly rozděleny Class diagramy projektu, v Class diagramech jsou popsány veškeré podpůrné funkce, které projekt používá, stránky, komponenty a API. V Class diagramech je například popsaná podpůrná funkce \code{roundToPreviousHour}, stránka \code{TaskCalendarPage} nebo komponenta \code{GroupCreate}. Class diagramy se nachází v kapitole \ref{sec:CD} v Příloze. 
 \section{Prisma}
 \label{sec:prisma}
-Databázové schéma v jazyku Prisma a databázové migrace se nachází ve složce \code{/prisma/}. Po úpravě databázové schématu je vhodné i vytvořit databázovou migraci, ta umožní manuálně spustit SQL příkazy, které Prisma vykonala, pokud to bude potřeba. Díky použití Prismy lze jak na API tak na frontendové části aplikace používat identické datové typy, nemusíme, především na Frontendu, definovat vlastní "Interface" pro každý objekt v databázi, který bychom museli pokaždé aktualizovat, když se změní databázové schéma, databázové schéma tedy může fungovat i jako Class diagram.
+
+Databázové schéma v jazyku Prisma a databázové migrace se nachází ve složce \code{/prisma/}. Po úpravě databázové schématu je vhodné i vytvořit databázovou migraci, ta umožní manuálně spustit SQL příkazy, které Prisma vykonala, pokud to bude potřeba. Díky použití Prismy lze jak na API tak na frontendové části aplikace používat identické datové typy, nemusíme, především na Frontendu, definovat vlastní "Interface" pro každý objekt v databázi, který bychom museli pokaždé aktualizovat, když se změní databázové schéma.
 Následuje vizualizace databázové schématu vygenerovaná pomocí webové aplikace Prismaliser \cite{prismaliser}.
 
 \begin{landscape}
@@ -214,7 +216,7 @@ Uživatelé se nacházejí, po přidání vlastníkem, ve skupinách, skupiny ma
 
 U úkolů a kategorií mohou úpravy provázet jen autoři a také majitel skupiny pod kterou spadají. Po odebrání, nebo odchodu uživatele ze skupiny, se veškeré úkoly převedou na majitele skupiny. 
 \newpage
-\subsection{Diagramy}
+\subsection{UseCase Diagramy}
 Pro přehlednost byl UseCase diagram rozdělen na dvě části, UseCase diagram aplikace a UseCase diagram v zobrazení skupiny.
 
 \begin{figure}[hbt!]
