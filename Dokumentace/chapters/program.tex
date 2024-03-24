@@ -17,7 +17,7 @@ Následuje vizualizace databázové schématu vygenerovaná pomocí webové apli
 \label{sec:api}
 
 Celé API je psané za pomocí tRPC, to se nachází ve složce \code{/src/server/api/}.
-API je inicializováno v souborech \code{trpc.ts} a \code{root.ts}. Konktrétně v souboru \code{trpc.ts} inicializujeme objekt tRPC a v \code{root.ts} se na něj napojují jednotlivé Routery. Samotné "endpointy", tedy přístupy, jsou rozděleny do "routerů", ty se nachází ve složce \code{/src/server/api/routers} a dělí se na jednotlivé "hlavní objekty" v databázi. Tyto routery jsou děleny na soubory \code{categories.ts}, \code{groups.ts}, \code{tasks.ts} a \code{users.ts}. V kódu se "endpointy" označují jako "procedury", v princpu existují dva druhy procedur; public\footnote{Veřejná} a protected\footnote{Chráněná}. Jediným rozdílem mezi nimi je, že protected procedura zaručuje, že jí může úspěšně zavolat pouze přihlášený uživatel.
+API je inicializováno v souborech \code{trpc.ts} a \code{root.ts}. Konkretně v souboru \code{trpc.ts} inicializujeme objekt tRPC a v \code{root.ts} se na něj napojují jednotlivé Routery. Samotné "endpointy", tedy přístupy, jsou rozděleny do "routerů", ty se nachází ve složce \code{/src/server/api/routers} a dělí se na jednotlivé "hlavní objekty" v databázi. Tyto routery jsou děleny na soubory \code{categories.ts}, \code{groups.ts}, \code{tasks.ts} a \code{users.ts}. V kódu se "endpointy" označují jako "procedury", v princpu existují dva druhy procedur; public\footnote{Veřejná} a protected\footnote{Chráněná}. Jediným rozdílem mezi nimi je, že protected procedura zaručuje, že ji může úspěšně zavolat pouze přihlášený uživatel.
 Následuje úryvek z routeru pro skupiny v souboru \code{groups.ts}, ostatní procedury byly z ukázky odstraněny.
 \begin{lstlisting}[caption={Procedura na přidání uživatele do skupiny}]
 import { z } from "zod";
@@ -177,7 +177,7 @@ Struktura adresáře \code{pages} vypadá následovně:
 	.2 index.tsx.
 }
 \hfill \break
-Ve složce \code{api} se nachází soubory pro inicializaci API a NextAuth na Frontendu, dále se zde nachází stránka \code{panel.ts}. K té je povolen přístup pouze ve vývojovém prostředí, jinak vždy vrací kód 404. Stránka byla použita během vývoje na testování API. NextAuth je incializován v souboru \code{/auth/[...nextauth].ts} a tRPC je inicalizováno v \code{/trpc/[trpc].ts}.
+Ve složce \code{api} se nachází soubory pro inicializaci API a NextAuth na Frontendu, dále se zde nachází stránka \code{panel.ts}. K té je povolen přístup pouze ve vývojovém prostředí, jinak vždy vrací kód 404. Stránka byla použita během vývoje na testování API. NextAuth je incializován v souboru \code{/auth/[...nextauth].ts} a tRPC je inicializováno v \code{/trpc/[trpc].ts}.
 
 \subsubsection{\_app.tsx}
 Soubor \code{\_app.tsx} je stavební kámen celé uživatelské části aplikace, tato stránka funguje, jako šablona pro všechny stránky aplikace. Na stránce pomocí komponenty \code{checkAuth} aplikace kontroluje na všech stránkách, kromě stránky index, zda je uživatel přihlášen a pokud ne, zobrazí uživateli pouze žádost o to, aby se přihlásil.
@@ -214,7 +214,7 @@ CheckAuth přijímá jako parametr \code{children}, tedy děti, ty komponentě n
 \section{Rozvržení uživatelských práv}
 Uživatelé se nacházejí, po přidání vlastníkem, ve skupinách, skupiny mají pod sebou úkoly a kategorie. Aby byl uživateli vylepšen prvotní zážitek při používání aplikace, tak mu je automaticky s účtem i vytvořena skupina. Samozřejmě si uživatelé mohou v aplikaci spravovat nové skupiny. Ve skupinách poté mohou vytvářet úkoly a kategorie, kategorie mohou být přiřazeny jednotlivým úkolům. Majitelé skupin mohou upravovat členství uživatelů ve skupině, vlastnosti skupiny, jako například název nebo převést skupinu na dalšího uživatele. 
 
-U úkolů a kategorií mohou úpravy provázet jen autoři a také majitel skupiny pod kterou spadají. Po odebrání, nebo odchodu uživatele ze skupiny, se veškeré úkoly převedou na majitele skupiny. 
+U úkolů a kategorií mohou úpravy provázet jen autoři a také majitel skupiny, pod kterou spadají. Po odebrání, nebo odchodu uživatele ze skupiny, se veškeré úkoly převedou na majitele skupiny. 
 \newpage
 \subsection{UseCase Diagramy}
 Pro přehlednost byl UseCase diagram rozdělen na dvě části, UseCase diagram aplikace a UseCase diagram v zobrazení skupiny.
@@ -231,14 +231,14 @@ Následující UseCase diagram zobrazuje akce, které mohou uživatelé provád�
 \end{figure}
 \clearpage
 \section{Uživatelské rozhraní}
-Uživatelské rozhraní aplikace je poměrně jednoduché v horní části aplikace se nachází navigační panel. V navigačním panelu se nachází název aplikace, odkaz na úkoly, kalendář a skupiny přihlášeného uživatele. Pokud uživatel není přihlášen tak se v navigačním panelu nachází i tlačítko pro přihlášení, jakmile se uživatel přihlásí tak tlačítko zmizí a je nahrazeno jeho profilovým obrázkem, ten slouží jako odkaz na stránku uživatele. 
+Uživatelské rozhraní aplikace je poměrně jednoduché v horní části aplikace se nachází navigační panel. V navigačním panelu se nachází název aplikace, odkaz na úkoly, kalendář a skupiny přihlášeného uživatele. Pokud uživatel není přihlášen tak se v navigačním panelu nachází i tlačítko pro přihlášení, jakmile se uživatel přihlásí, tak tlačítko zmizí a je nahrazeno jeho profilovým obrázkem, ten slouží jako odkaz na stránku uživatele. 
 
-Výchozí nastavení, které používá T3 Stack je uložit odkaz na profilový obrázek z účtu, pomocí kterého se přihlásil uživatel do aplikace. Toto řešení je poměrně "nešťastné", protože při každém vstupu do aplikace se musí provést volání na externí službu, kde aplikace uživatelův obrázek stáhne. Z tohoto důvodu jsem se rozhodl použít pro generování profilových obrázků knihovnu \code{DiceBear}\cite{dicebear}. Tato knihovna poskytuje rozhraní pro vytváření různých avatarů formátu SVG.
+Výchozí nastavení, které používá T3 Stack, je uložit odkaz na profilový obrázek z účtu, pomocí kterého se přihlásil uživatel do aplikace. Toto řešení je poměrně "nešťastné", protože při každém vstupu do aplikace se musí provést volání na externí službu, kde aplikace uživatelův obrázek stáhne. Z tohoto důvodu jsem se rozhodl použít pro generování profilových obrázků knihovnu \code{DiceBear}\cite{dicebear}. Tato knihovna poskytuje rozhraní pro vytváření různých avatarů formátu SVG.
 
 \subsection{Registrace do aplikace}
 Jakmile NextAuth zachytí událost typu registrace nového uživatele, tak zavolá tuto knihovnu a ta mu vytvoří nový profilový obrázek, ten je následně převeden na text a uložen do databáze. Jako "seed" pro generaci je použito uživatelovo \code{ID} a jako skupinu avatarů aplikace používá "lorelei-neutral"\cite{lorelei-neutral}. Při odchytnutí nového uživatele je také pro tohoto uživatele automaticky vytvořena nová skupina.
 
-Jakmile je na serveru zachycena událost\footnote{Tedy "Event"} o vytvoření nového uživatele, NextAuth tento Event vyvolá pokaždé co se zaregistruje nový uživatel do aplikace vytvoří se nový záznam v databázi. Při vytvoření uživatele je vygenerován nový uživatelský obrázek pomocí knihovny DiceBear. Po vygenerování obrázku je obrázek převeden na \code{DataURI} a uložen do databáze. Po uložení obrázku je uživatelovi dále vytvořena první skupina, ta je vytvořena pro ulehčení a zjednodušení prvního vstupu do aplikace.
+Jakmile je na serveru zachycena událost\footnote{Tedy "Event"} o vytvoření nového uživatele, NextAuth tento Event vyvolá pokaždé, co se zaregistruje nový uživatel do aplikace vytvoří se nový záznam v databázi. Při vytvoření uživatele je vygenerován nový uživatelský obrázek pomocí knihovny DiceBear. Po vygenerování obrázku je obrázek převeden na \code{DataURI} a uložen do databáze. Po uložení obrázku je uživatelovi dále vytvořena první skupina, ta je vytvořena pro ulehčení a zjednodušení prvního vstupu do aplikace.
 
 \begin{figure}[hbt!]
 	\includegraphics[width=1\linewidth]{img/neprihlasenyNavbar.png}

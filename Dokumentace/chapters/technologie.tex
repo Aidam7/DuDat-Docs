@@ -1,11 +1,11 @@
 \chapter{Technologie}
 \section{Licence}
-Jednou z prvních věcí, kterou je vhodné zvážit ještě než na projektu začneme pracovat je licence pod kterou projekt bude zpracován. Pro projekt byla zvolena MIT Licence, také známá jako Expat nebo X11\cite{GNU-Mit}. MIT Licence vznikla na Massachusettském technologickém institutu roku 1988 a umožňuje ostatním uživatelům software jakkoliv upravovat a vydávat nové verze programu, i pod jinou licencí, pokud uvedou autora a ponechají původní kód pod MIT Licencí\cite{Github-Mit}.
+Jednou z prvních věcí, kterou je vhodné zvážit ještě než na projektu začneme pracovat, je licence pod kterou projekt bude zpracován. Pro projekt byla zvolena MIT Licence, také známá jako Expat nebo X11\cite{GNU-Mit}. MIT Licence vznikla na Massachusettském technologickém institutu roku 1988 a umožňuje ostatním uživatelům software jakkoliv upravovat a vydávat nové verze programu, i pod jinou licencí, pokud uvedou autora a ponechají původní kód pod MIT Licencí\cite{Github-Mit}.
 \section{Stack}
 V dnešní době je prakticky neomezeně různých způsobů, jak si sestavit technologický stack\footnote{Stack je označení pro technologie, které jsou na projektu použity} pro tvorbu full-stackové\footnote{Termín full-stack označuje aplikace, které se skládají jak z klientské části, tedy "Frontend", a ze serverové části, tedy "Backend". Backend a Frontend spolu komunikují za pomoci API.} webové aplikace.
 Pro tvorbu jsem zvolil T3 Stack, T3 Stack skládá dohromady různé poměrně populární technologie na tvorbu full-stack aplikací, ale zároveň při tvoření projektu, za použití \code{create-t3-app} si umožňuje Stack jakkoliv upravit\cite{t3stack}.
 \subsection{Typescript}
-T3 Stack obsahuje Typescript\footnote{Zkráceně TS}, to je jedna z jeho hlavních předností. Typescript je nad stavbou nad jazykem Javascript\footnote{Zkráceně JS}. Typescript se od JS liší, jak již název napovídá, přidáním typů, byť se může zdát, že se jedná pouze o "syntaktický cukr"\footnote{Slangový termín pro nadbytečné funkce programovacích jazyků}, tak je TS, narozdíl od JS, který je interpretovaný jazyk, kompilovaný jazyk. Typescript umožňuje definovat typy proměných, funkcí a dalších objektů, což umožňuje efektivní ladění kódu a typové kontroly.
+T3 Stack obsahuje Typescript\footnote{Zkráceně TS}, to je jedna z jeho hlavních předností. Typescript je nad stavbou nad jazykem Javascript\footnote{Zkráceně JS}. Typescript se od JS liší, jak již název napovídá, přidáním typů, byť se může zdát, že se jedná pouze o "syntaktický cukr"\footnote{Slangový termín pro nadbytečné funkce programovacích jazyků}, tak je TS, na rozdíl od JS, který je interpretovaný jazyk, kompilovaný jazyk. Typescript umožňuje definovat typy proměnných, funkcí a dalších objektů, což umožňuje efektivní ladění kódu a typové kontroly.
 
 \subsubsection{Interpretované a Kompilované jazyky}
 Interpretované jazyky jsou spouštěny postupným čtením kódu od 0. řádku až na konec programu, to má za následek, že některé chyby jdou zachytit až po spuštění samotného programu. Kompilované jazyky před spuštěním projdou kompilací a mohou tak zachytit všechny chyby, které by mohly nastat.
@@ -39,9 +39,9 @@ deleteById: protectedProcedure
 \autoref{sec:api} obsahuje podrobnější popis celé API.
 
 \subsection{Prisma a Databáze}
-Datová vrsta je v projektu řešená pomocí PostgreSQL, která se řadí mezi relační databáze.
+Datová vrstva je v projektu řešená pomocí PostgreSQL, která se řadí mezi relační databáze.
 
-Pro připojení na databázi volí T3 Stack databázové ORM Prisma. Prisma je páteřní technologie, která umožňuje sdílení typů mezi serverou a klientskou částí aplikace. Další bezpochybnou výhodou Prismy je její bezpečnost, psaní čistých SQL příkazů do aplikace může vést někdy až ke kritickým chybám či ztrátě dat. Prisma ve vývojovém prostředí poskytuje našeptávání přímo z databázového schématu\footnote{Databázové schéma určuje strukturu databáze.} a tak je mnohem těžší udělat chyby.
+Pro připojení na databázi volí T3 Stack databázové ORM Prisma. Prisma je páteřní technologie, která umožňuje sdílení typů mezi serverem a klientskou částí aplikace. Další bezpochybnou výhodou Prismy je její bezpečnost, psaní čistých SQL příkazů do aplikace může vést někdy až ke kritickým chybám či ztrátě dat. Prisma ve vývojovém prostředí poskytuje našeptávání přímo z databázového schématu\footnote{Databázové schéma určuje strukturu databáze.} a tak je mnohem těžší udělat chyby.
 Pro design databázového schématu používá Prisma vlastní jazyk.
 
 \begin{lstlisting}[language=Prisma, caption={Úryvek z Databázové schématu zobrazující strukturu tabulky pro členství ve skupině}]
@@ -61,12 +61,12 @@ model GroupMembership {
 \autoref{sec:prisma} obsahuje podrobnější dokumentaci databázového schématu.
 
 \subsection{NextAuth}
-Autentikaci a autorizaci užvitelů T3 Stack řeší za pomocí NextAuth. NextAuth nám umožňuje, místo standardního přihlašování formou email-heslo, použít takzvané \textit{Provider}y\footnote{Provider = Poskytovatel přihlášení}.
+Autentikaci a autorizaci uživatelů T3 Stack řeší za pomocí NextAuth. NextAuth nám umožňuje, místo standardního přihlašování formou email-heslo, použít takzvané \textit{Provider}y\footnote{Provider = Poskytovatel přihlášení}.
 To má mnoho výhod, například, nemusíme ukládat uživatelovo heslo a přihlašování pro uživatele je jednodušší, postačí kliknout na jedno tlačítko a prohlížeč provede automatické přihlášení, za předpokladu, že už na něj uživatel je přihlášený.
-Pokud přihlášený není, bude přesměrován na přihlašovací stránku providera. NextAuth nabízí přes 30 Providerů\cite{next-auth}, já se rozhodl pro použití přihlášení od společnosti Google vzhledem k rozšířenosti Google účtů ve společnosti. Jednou z nevýhod tohoto řešení je, že pokud u Providera dojde k úniku dat budou v ohrožení i data uživatelů.
+Pokud přihlášený není, bude přesměrován na přihlašovací stránku providera. NextAuth nabízí přes 30 Providerů\cite{next-auth}, já se rozhodl pro použití přihlášení od společnosti Google, vzhledem k rozšířenosti Google účtů ve společnosti. Jednou z nevýhod tohoto řešení je, že pokud u Providera dojde k úniku dat budou v ohrožení i data uživatelů.
 
 \subsection{TailwindCSS, PostCSS a NextUI}
-Na stylování projektu používá T3 Stack TailwindCSS. Tailwind CSS je moderní CSS framework, kerý umožňuje vytvářet responzivní uživatelská rozhraní pomocí předdefinovaných tříd. Tailwind CSS nabízí rychlou a flexibilní alternativu k psaní vanilla\footnote{Vanilla = Označení pro neupravenou verzi technologie} CSS.
+Na stylování projektu používá T3 Stack TailwindCSS. Tailwind CSS je moderní CSS framework, který umožňuje vytvářet responzivní uživatelská rozhraní pomocí předdefinovaných tříd. Tailwind CSS nabízí rychlou a flexibilní alternativu k psaní vanilla\footnote{Vanilla = Označení pro neupravenou verzi technologie} CSS.
 \begin{lstlisting}[caption={Ukázka stylování HTML prvku za použití vanilla CSS\cite{tailwind-example}}]
 //CSS soubor:
 .vanilla {
@@ -114,7 +114,7 @@ Eslint má v konfiguraci 3 následující možnosti hlášení chyb\cite{eslint}
 \section{Dodatečné technlogie}
 Projekt je spouštěn pomocí node.js v kombinaci s NPM\footnote{Node Package Manager - správce balíčků pro Javascript standardně používán v ekosystému Node.js}. Celý kód je verzován verzovacím systémem Git a psán v textovém editoru Visual Studio Code (VS Code).
 \subsection{package.json}
-Tento konfigurační soubor je často přehlížen, ale jedná se o stěžejní konfigurační soubor celého projektu. V \code{package.json} jsou definovaný takzvané "závislosti" projektu. \code{Package.json} funguje jako nákupní seznam, kde jsou právě tyto závislost napsané. Po naklonování projektu je nutné spustit příkaz \code{npm i}, ten vezme \code{package.json} a z platformy NPM\cite{npm} stáhne všechny balíčky na kterých projekt závisí a automaticky je nainstaluje do složky \code{node\_module}.
+Tento konfigurační soubor je často přehlížen, ale jedná se o stěžejní konfigurační soubor celého projektu. V \code{package.json} jsou definovaný takzvané "závislosti" projektu. \code{Package.json} funguje jako nákupní seznam, kde jsou právě tyto závislost napsané. Po naklonování projektu je nutné spustit příkaz \code{npm i}, ten vezme \code{package.json} a z platformy NPM\cite{npm} stáhne všechny balíčky, na kterých projekt závisí a automaticky je nainstaluje do složky \code{node\_module}.
 
 \section{Konfigurace}
 Ještě než se podaří spustit projekt, je dalším krokem vytvoření konfiguračního souboru \code{.env}\footnote{Z anglického "environment", tedy "prostředí"}. Ten z bezpečnostních důvodů není obsažen v repozitáři, protože obsahuje velmi citlivé informace (přístupové údaje k databázi nebo klíče k autentikaci uživatel). Vzhledem k tomu, že \code{.env} soubor musí mít pro správné fungování aplikace jistou strukturu, je v repozitáři šablona \code{.env.example}.
