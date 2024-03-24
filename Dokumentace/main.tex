@@ -138,7 +138,7 @@
 \pagebreak
 \unnumberedsection{Poděkování}
 Chtěl bych poděkovat Ing. Monice Borkovcové, Ph.D. za vedení tohoto maturitního projektu a
-konzultaci problémů. Dále bych chtěl poděkovat Jakubovi Hamplovi za pomoc se složením použitých technonologií, Nele Bartákové za pomoc se vzhledem aplikace a Martině Kozlové s Nelou Halfarovou za cennou zpětnou vazbu v rozličných oblastech.
+konzultaci problémů. Dále bych chtěl poděkovat Jakubovi Hamplovi za pomoc se složením použitých technologií, Nele Bartákové za pomoc se vzhledem aplikace a Martině Kozlové s Nelou Halfarovou za cennou zpětnou vazbu v rozličných oblastech.
 \pagebreak
 
 % Resumé
@@ -181,11 +181,19 @@ V Pardubicích 4.2.2024
 \setcounter{section}{1}
 \pagenumbering{arabic}
 \chapter{Úvod}
-Na internetu lze nalézt mnoho TODO aplikací, tedy zápisníků, které cílí buďto na jednotlivce nebo na skupiny. Problém nastává, jakmile má uživatel zájem o zapisování si vlastních úkolů a zároveň úkolování skupiny, ať už v práci nebo rodiny, je tedy nucen často používat dvě oddělené aplikace. Aplikace na trhu také bývají velmi strohé nebo naopak příliš komplexní a tedy placené. 
+V současné době je k dispozici velké množství TODO aplikací. Tyto aplikace slouží k správě seznamů úkolů a organizaci pracovních, osobních nebo jiných aktivit. Jedná se o běžně používané softwarové aplikace k usnadnění plánování, sledování a dokončení úkolů. TODO aplikace jsou převážně dostupné ve formě mobilních nebo webových aplikací.
+\newline
+Základní funkce, které takové aplikace obvykle obsahují, zahrnují správu úkolů, stanovení termínů a upomínek k úkolům, možnosti kategorizace a štítkování, sdílení seznamů úkolů a například i integraci s dalšími aplikacemi. Často bývá součástí TODO aplikace i funkcionalita "štítkování", která v některých aplikacích může nahrazovat kategorizaci nebo ji může doplňovat.
+\newline
+TODO aplikace cílí buď na jednotlivce nebo na skupiny. Problém nastává, jakmile má uživatel zájem o zapisování  vlastních úkolů a zároveň úkolování skupiny, ať už na úrovni pracovní nebo osobní. V tomto případě je nucen často používat dvě oddělené aplikace. Aplikace na trhu také bývají velmi zjednodušené nebo naopak příliš komplexní, což práci s takovou aplikací může paradoxně až znevýhodnit. Komplexnější aplikace bývají také placené nebo poskytují jen velmi omezenou dostupnost funkcionalit v základní neplacené verzi.
 \newline
 
-Cílem práce je vytvořit intuitivní TODO aplikaci s webovým rozhraním, která umožňuje rychlou správu úkolů, přání a jejich dělení do různých kategorií. Uživatelé aplikace se vzájemně přidávají do skupin, ve kterých si mohou úkoly či přání zadávat. Úkoly mohou mít časová omezení a uživatelé, kteří plní tyto úkoly je vidí v zabudovaném kalendáři.
-
+Cílem maturitní práce je vytvořit intuitivní TODO aplikaci s webovým rozhraním, která umožňuje rychlou správu úkolů, přání a jejich dělení do různých kategorií. Uživatelé aplikace se vzájemně přidávají do skupin, ve kterých si mohou úkoly či přání zadávat. Úkoly mohou mít časová omezení a uživatelé, kteří plní tyto úkoly, je vidí ve vestavěné funkcionalitě kalendáře.
+\newline
+Tato práce je rozdělena do dvou základních částí. První část se soustředí na vysvětlení základních pojmů a podobné aplikace, ty popisuje kapitola 2. Následující kapitola pak seznamuje se "základním technologickým stackem". V práci bude použit Typescript, React a Next.js, tRPC, Prisma, NextAuth, TailwindCSS, Prettier a další.
+\newline
+Druhá část se již prakticky věnuje samotnému vývoji webové aplikace. Popis tvorby zahrnující jednotlivé kroky vývoje webové aplikace od analýzy až po implementaci je popsán v kapitole 4 Aplikace.
+\newline
 % Content
 \input{chapters/porovnaniTrhu}
 \input{chapters/technologie}
@@ -197,6 +205,8 @@ Cílem práce bylo vytvořit intuitivní TODO aplikaci s webovým rozhraním. Ap
 Aplikace je hostovaná na platformě Vercel\cite{vercel} a databáze je hostovaná na platformě Neon\cite{neon}.
 
 V rámci práce jsem se naučil s novými technologiemi jako je Prisma, tRPC, NextAuth a TailwindCSS. Dále jsem získal hlubší porozumění s technologiemi Next.js, React a Typescript.
+
+Stanovený výstup práce je funkční a cíl byl splněn. Webová aplikace byla ověřena testováním na uživatelích, kdy se během procesu testování, ale i po jednotlivých funkčních blocích v rámci vývoje aplikace podrobila vyzkoušení z pohledu uživatelů. Toto mi přineslo cennou zpětnou vazbu, která mi pomohla lépe pochopit uživatelské chování a preference. Jednou ze změn, které nastaly na popud zpětné vazby byla například přidání "Streak" systému nebo kopírování úkolů či přání. Hlavní přínos spatřuji v možnosti implementovat takové úpravy, které odpovídají potřebám uživatelů. 
 
 Do budoucna bych chtěl, například, umožnit uživatelům měnit časová omezení úkolů přímo v kalendáři pomocí "drag and drop"\footnote{"Táhni a pusť"} systému.
 % Literature
