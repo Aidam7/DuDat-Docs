@@ -18,7 +18,7 @@ Typescript je kompilovaný jazyk poměrně netradičním způsobem, protože TS 
 Celá uživatelská část aplikace je psaná pomocí populárního frameworku Next.js, který je zároveň nadstavba snad ještě populárnějšího frameworku React. T3 Stack obsahuje Next.js, který poskytuje velmi příjemné funkce, které ulehčují vývoj aplikací, například automatickou optimalizaci routování nebo cachování\cite{vercel}.
 
 \subsection{tRPC}
-Pro řešení API, tedy komunikačního kanálu mezi uživatelskou a serverou částí, T3 Stack volí tRPC. tRPC je elegantní způsob jak psát endpointy\footnote{Endpoint = část API, se kterou se dá komunikovat "z venčí"}. Pro typovou validaci dat volí T3 stack knihovnu Zod\cite{zod}.
+Pro řešení API, tedy komunikačního kanálu mezi uživatelskou a serverovou částí, T3 Stack volí tRPC. tRPC je elegantní způsob jak psát endpointy\footnote{Endpoint = část API, se kterou se dá komunikovat "z venčí"}. Pro typovou validaci dat volí T3 stack knihovnu Zod\cite{zod}.
 \begin{lstlisting}[caption={Úryvek z "groups" routeru zobrazující mazání skupiny}]
 // Nerelevantní části byly nahrazeny *pseudokódem*
 deleteById: protectedProcedure
